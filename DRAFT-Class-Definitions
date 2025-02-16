@@ -1,0 +1,93 @@
+class User: 
+    def __init__(self, userID, lastName, firstName, salary): 
+        self.userID = userID
+        self.lastName = lastName
+        self.firstName = firstName
+        self.salary = salary
+        self.points = self.allocatePoints(salary)
+    
+    def allocatePoints(self, salary):
+        if salary < 10000: 
+            return 5000
+        elif salary < 20000: 
+            return 4000
+        elif salary < 30000: 
+            return 3000
+        elif salary < 40000: 
+            return 2000
+        else: 
+            return 1000
+
+    def __str__(self): 
+        return f"{self.firstName} {self.lastName} has a salary of {self.salary}, corresponding to {self.points} points."
+
+class Item: 
+    def __init__(self, itemID, itemName, itemValue, itemQuantity): 
+        self.itemID = itemID
+        self.itemName = itemName
+        self.itemValue = itemValue
+        self.itemQuantity = itemQuantity
+
+    def __str__(self): #getItemDetails
+        return f"ITEM DESCRIPTION\nItem ID: {self.itemID}\nItem Name: {self.itemName}\nItem Value: {self.itemValue}\nItem Quantity: {self.itemQuantity}"
+
+class Admin: 
+    def __init__(self, adminID, name): 
+        self.adminID = adminID
+        self.name = name
+
+    def verifyAddItem(self, item, enteredName, enteredQuantity): 
+        if enteredName.lower() != item.itemName.lower(): 
+            return f"Item name mismatch. Expected: {item.itemName}, Received: {enteredName}"
+        if enteredQuantity == item.itemQuantity: 
+            return "Verified item addition"
+        else: 
+            item.itemQuantity = enteredQuantity 
+            return f"Item information updated: {item.itemName} with quantity set to {enteredQuantity}"
+
+class Transaction: 
+    def __init__(self, transactionID, user, items, admin): 
+        self.transactionID = transactionID
+        self.user = user
+        self.items = items
+        self.status = "Pending"
+
+        if not isinstance(admin, Admin): 
+            raise ValueError("Error: Only an Admin can be assigned to this transaction.")
+        
+        self.admin = admin
+        self.status = "Pending"
+
+    def requestItem(self): 
+            totalCost = sum(item.itemValue for item in self.items)
+            if self.user.points >= totalCost: 
+                for item in self.items: 
+                    if item.itemQuantity == 0: 
+                        self.status = "Failed - Item out of stock"
+                        return f"Transaction failed - {item.itemName} is out of stock" 
+                    else: 
+                        self.user.points -= totalCost
+                        for item in self.items: 
+                            item.itemQuantity -= 1
+                        self.status = "Approved"
+                        return "Transaction approved"
+            else: 
+                self.status = "Denied"
+                return "Transaction denied - Insufficient points"
+    
+    def addItem(self, item, enteredName, enteredQuantity): 
+        return self.admin.verifyAddItem(item, enteredName, enteredQuantity)
+            
+
+class Complaints: 
+    def __init__(self, issueID, user, issueDesc): 
+        self.issueID = issueID
+        self.user = user 
+        self.issueDesc = issueDesc
+        self.issueStatus = "Pending"
+
+    def resolveIssue(self): 
+        self.issueStatus = "Resolved"
+
+    def __str__(self): 
+        return f"User {self.user.userID} filed a complaint. Details: {self.issueDesc}\nStatus: {self.issueStatus}"
