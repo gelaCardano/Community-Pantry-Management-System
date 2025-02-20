@@ -9,6 +9,6 @@ CONTRIBUTORS:
 - LIM, Julian 
 
 HOW TO USE THE PROGRAM: 
-Pre-requisite: Download the SQLite Viewer extension in VSC
-1. Download the main.py and kapitbisig.db.
-2. Run the programs in VSC
+1. Optional: Download the SQLite Viewer extension in VSC.
+2. Download the main.py and kapitbisig.db.
+3. Run the Backend (Version 1.1) in VSC.
