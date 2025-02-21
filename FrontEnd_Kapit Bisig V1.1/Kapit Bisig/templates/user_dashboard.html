@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Kapit-Bisig Pantry</title>
+</head>
+<body>
+    <h2>Welcome, {{ user['firstName'] }}!</h2>
+
+    <!-- Flash Messages for Feedback -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category == 'danger' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h3>Your Profile</h3>
+    <p><strong>Username:</strong> {{ user['username'] }}</p>
+    <p><strong>Points:</strong> {{ user['points'] }}</p>
+
+    <h3>Available Pantry Items</h3>
+    {% if items %}
+        <ul>
+            {% for item in items %}
+                <li>
+                    <strong>{{ item['itemName'] }}</strong> - {{ item['itemQuantity'] }} available 
+                    ({{ item['itemValue'] }} points each)
+                    
+                    <form method="POST" action="{{ url_for('request_item') }}">
+                        <input type="hidden" name="itemID" value="{{ item['itemID'] }}">
+                        <label for="quantity">Quantity:</label>
+                        <input type="number" id="quantity" name="quantity" min="1" required>
+                        <button type="submit">Request Item</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No items available in the pantry.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
