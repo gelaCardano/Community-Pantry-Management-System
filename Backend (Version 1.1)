@@ -219,25 +219,32 @@ def signup():
     except sqlite3.IntegrityError:
         print("Username already exists. Please choose another one.")
 
-
 def login():
+    conn = sqlite3.connect("kapitbisig.db", check_same_thread=False)
+    cursor = conn.cursor()
     username = input("Enter username: ")
-    password = input("Enter password: ")
-
-    cursor.execute("SELECT userID, password, lastName, firstName, salary, points, role FROM users WHERE username = ?", (username,))
-    result = cursor.fetchone()
-
-    if result and bcrypt.verify(password, result[1]):
-        userID, _, lastName, firstName, salary, points, role = result
-        print(f"\nLogin successful! Welcome, {username} (Role: {role})")
-
-        if role == "admin":
-            return Admin(userID, username, lastName, firstName, salary, points, role)
-        return UserFromDB(userID, username, lastName, firstName, salary, points, role)
-    else:
-        print("Invalid username or password.")
-        return None
-
+    
+    cursor.execute("SELECT userID, password, role FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    
+    if user is None:
+        print("Username not found.")
+        return
+    
+    userID, hashed_password, role = user
+    attempts = 3
+    
+    while attempts > 0:
+        password = input("Enter password: ")
+        if bcrypt.checkpw(password):
+            print("Login successful!")
+            return userID, role
+        else:
+            attempts -= 1
+            print(f"Incorrect password. {attempts} attempt(s) remaining.")
+    
+    print("Too many failed attempts. Login blocked.")
+    return None
 
 # ---------- Dashboards ----------
 def user_dashboard(user):
@@ -257,8 +264,12 @@ def user_dashboard(user):
                 print(f"Item ID: {item[0]} | Name: {item[1]} | Value: {item[2]} points | Quantity: {item[3]}")
         
         elif choice == "2":
-            itemID = int(input("Enter Item ID to request: "))
-            quantity = int(input("Enter quantity: "))
+            try:
+                itemID = int(input("Enter Item ID to request: "))
+                quantity = int(input("Enter quantity: "))
+            except ValueError:
+                print("Invalid input! Please enter a valid number.")
+                return
 
             cursor.execute("SELECT itemValue, itemQuantity FROM items WHERE itemID = ?", (itemID,))
             item = cursor.fetchone()
