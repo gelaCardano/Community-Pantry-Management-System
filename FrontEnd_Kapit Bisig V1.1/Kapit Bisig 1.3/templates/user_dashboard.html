@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Kapit-Bisig Pantry</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        } 
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, {{ user['firstName'] }}!</h2>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category == 'danger' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <h3>Your Profile</h3>
+    <p><strong>Username:</strong> {{ user['username'] }}</p>
+    <p><strong>Points:</strong> {{ user['points'] }}</p>
+
+    <!-- Available Pantry Items -->
+    <h3>Available Pantry Items</h3>
+    {% if items %}
+        <form method="POST" action="{{ url_for('request_items_bulk') }}">
+            <table>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Points per Unit</th>
+                    <th>Available Quantity</th>
+                    <th>Request Quantity</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item['itemName'] }}</td>
+                    <td>{{ item['itemValue'] }}</td>
+                    <td>{{ item['itemQuantity'] }}</td>
+                    <td>
+                        <input type="number" name="quantity_{{ item['itemID'] }}" min="0" max="{{ item['itemQuantity'] }}" value="0">
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <button type="submit">Add to Cart & Request</button>
+        </form>
+    {% else %}
+        <p>No items available in the pantry.</p>
+    {% endif %}
+
+    <!-- Lodge a Complaint -->
+    <h3>Lodge a Complaint</h3>
+    <form method="POST" action="{{ url_for('file_complaint') }}">
+        <label>Describe the Issue:</label><br>
+        <textarea name="issueDesc" rows="4" required></textarea><br>
+        <button type="submit">Submit Complaint</button>
+    </form>
+
+    <br>
+    <a href="{{ url_for('home') }}">Back to Home</a> |
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

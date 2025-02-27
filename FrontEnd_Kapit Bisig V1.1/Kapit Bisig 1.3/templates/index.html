@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+<title>Home - Kapit-Bisig Pantry</title>
+<body>
+       <div class="header">
+            <img class="logo-img" src="static/kBlogo-final.png">
+            <div class="logo"><i>Kapit Bisig</i></div>    
+            <div class="buttons">
+                    <a class="active" href="{{url_for('home')}}">Home</a>
+                    <a href="{{ url_for('signup') }}">Sign Up</a>
+                    <a href="{{ url_for('login') }}">Login</a>
+            </div>
+        </div>
+    <h1><i>Welcome to <span class="pink">Kapit-Bisig</span></h1> <h1><span class="sfive">An Online Community Pantry</span></i></h1>
+    <p><i>Give What You Can, Take What You Need</i></p>
+    <div class="semi-circle"><span class="contact"><i>Contact Us: kapit.bisig@gmail.com</i></span></div>
+</body>
+</html>

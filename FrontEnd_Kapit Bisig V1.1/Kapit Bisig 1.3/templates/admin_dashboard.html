@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Kapit-Bisig Pantry</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        } 
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .approve-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .reject-btn {
+            background-color: #f44336; /* Red */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h2>Welcome, Admin {{ admin['firstName'] }}!</h2>
+
+    <!-- Flash Messages for Feedback -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <p style="color: {% if category == 'danger' %}red{% else %}green{% endif %};">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Transactions Table -->
+    <h3 id="transactions">Transaction History</h3>
+    {% if transactions %}
+        <table>
+            <tr>
+                <th>Transaction ID</th>
+                <th>User ID</th>
+                <th>Action</th>
+                <th>Details</th>
+                <th>Status</th>
+                <th>Timestamp</th>
+            </tr>
+            {% for trans in transactions %}
+                <tr>
+                    <td>{{ trans['transactionID'] }}</td>
+                    <td>{{ trans['userID'] }}</td>
+                    <td>{{ trans['action'] }}</td>
+                    <td>{{ trans['details'] }}</td>
+                    <td>{{ trans['status'] }}</td>
+                    <td>{{ trans['timestamp'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No transactions recorded.</p>
+    {% endif %}
+
+<!-- Pending Requests Table -->
+<h3 id="pending-requests">Pending Item Requests</h3>
+{% if pending_requests %}
+    <table>
+        <tr>
+            <th>Transaction ID</th>
+            <th>User ID</th>
+            <th>Details</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for request in pending_requests %}
+            <tr>
+                <td>{{ request['transactionID'] }}</td>
+                <td>{{ request['userID'] }}</td>
+                <td>{{ request['details'] }}</td>
+                <td>{{ request['status'] }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('approve_request') }}" style="display:inline;">
+                        <input type="hidden" name="transactionID" value="{{ request['transactionID'] }}">
+                        <button type="submit" class="approve-btn">Approve</button>
+                    </form>
+                    <form method="POST" action="{{ url_for('reject_request') }}" style="display:inline;">
+                        <input type="hidden" name="transactionID" value="{{ request['transactionID'] }}">
+                        <button type="submit" class="reject-btn">Reject</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No pending item requests.</p>
+{% endif %}
+
+    <!-- Add Item Form -->
+    <h3 id="add-item">Add a New Pantry Item</h3>
+    <form method="POST" action="{{ url_for('add_item') }}">
+        <label>Item Name:</label>
+        <input type="text" name="itemName" required><br>
+
+        <label>Item Value (points):</label>
+        <input type="number" name="itemValue" required><br>
+
+        <label>Quantity:</label>
+        <input type="number" name="itemQuantity" required><br>
+
+        <button type="submit">Add Item</button>
+    </form>
+
+    <!-- Pending Complaints -->
+    <h3 id="complaints">Pending Complaints</h3>
+    {% if complaints %}
+        <table>
+            <tr>
+                <th>Complaint ID</th>
+                <th>User ID</th>
+                <th>Issue</th>
+                <th>Status</th>
+                <th>Resolve</th>
+            </tr>
+            {% for complaint in complaints %}
+                <tr>
+                    <td>{{ complaint['issueID'] }}</td>
+                    <td>{{ complaint['userID'] }}</td>
+                    <td>{{ complaint['issueDesc'] }}</td>
+                    <td>{{ complaint['issueStatus'] }}</td>
+                    <td>
+                        {% if complaint['issueStatus'] == "Pending" %}
+                            <form method="POST" action="{{ url_for('resolve_complaint') }}">
+                                <input type="hidden" name="issueID" value="{{ complaint['issueID'] }}">
+                                <button type="submit">Resolve</button>
+                            </form>
+                        {% else %}
+                            Resolved
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No pending complaints.</p>
+    {% endif %}
+
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>

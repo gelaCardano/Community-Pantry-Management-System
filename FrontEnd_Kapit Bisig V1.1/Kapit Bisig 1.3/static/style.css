@@ -1,0 +1,131 @@
+*{
+  margin: 0;
+}
+
+
+h1{
+    text-align: center;
+    font-size:650%;
+    font-family:"open sans",sans-serif;
+    color: white;
+    text-shadow: 20px 5px 10px #000000;
+    margin: 0px 10px;
+}
+p{
+    font-family: "open sans", sans-serif;
+    text-align: center;
+    font-size:450%;
+    color: white;
+}
+.sfive{
+    font-size: 75%;
+}
+.logo{
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-family: "trebuchet ms", sans-serif;
+    font-size: 60px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+.logo-pic{
+    float: left;
+}
+.pink{
+  color:#f784b3;
+  font-style: bold;
+}
+.logo-img{
+  float: left;
+  height: 50px;
+}
+.header {
+    overflow: hidden;
+    border-radius: 20px;
+    background-color:hsla(329, 75%, 70%, 0.8);
+    padding: 20px 10px;
+    margin: 10px 10px 10px 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 100px;
+  }
+  .header a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 25px;
+    border-radius: 4px;
+  }
+
+  .header a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .header a.active {
+    background-color: white;
+    color: black;
+  }
+  
+  .buttons {
+    float: right;
+  }
+  @media screen and (max-width: 500px) {
+    .header a {
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .header-right {
+      float: none;
+    }
+  }
+header{
+    background-color: #f784b3;
+    color: #FFFFFF;
+    height: 65px;
+    opacity: 90%;
+    align-items: center;
+}
+a{
+    color:#FFFFFF;
+    font-size:140%;
+    font-family: "montserrat", sans-serif;
+    text-decoration: none;
+}
+.logoPic{ 
+  background-image: url(kBlogo.png);
+}
+.semi-circle {
+    background: hsla(329, 75%, 70%, 0.8);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    height: 280px;
+    width: 1500px;
+    left: 0;  
+    right: 15%;
+    border-radius: 50%;
+    position: absolute;
+    bottom: -30%;
+    text-align: center;
+    padding-top: 2%;
+}
+.contact{
+  position: center;
+  font-family: "trebuchet ms", sans-serif;
+  color: white;
+  padding-top: 10px;
+  font-size: 25px;
+}
+body{
+    overflow: hidden;
+    background-image: url("bg.jpg"); 
+    background-attachment: fixed;
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
