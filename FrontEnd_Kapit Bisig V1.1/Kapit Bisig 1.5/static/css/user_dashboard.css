@@ -1,0 +1,217 @@
+/* 🔹 RESET STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+/* 🔹 BODY - Full background */
+.dashboard-body {
+    height: 100vh;
+    background: url("../images/udashboardbg.png") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 🔹 HEADER - Thinner Bar & Smaller Logo */
+header {
+    width: 100%;
+    height: 70px; /* Adjusted for a thinner look */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background: rgba(255, 255, 255, 0.9); /* Light translucent effect */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 LOGO - Smaller Size */
+.logo img {
+    width: 70px;  /* Adjusted size */
+    height: auto;
+}
+
+/* 🔹 NAVIGATION */
+nav {
+    display: flex;
+    gap: 15px;
+}
+
+/* 🔹 NAV BUTTONS */
+.nav-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+/* 🔹 HOME BUTTON (Pink) */
+.home-btn {
+    background: #f784b3;
+    color: white;
+}
+
+.home-btn:hover {
+    background: #d96092;
+}
+
+/* 🔹 LOGOUT BUTTON (White) */
+.logout-btn {
+    background: white;
+    color: black;
+    border: 1px solid #ccc;
+}
+
+.logout-btn:hover {
+    background: #f2f2f2;
+}
+
+/* 🔹 MAIN CONTENT */
+main {
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 🔹 FLASH MESSAGES */
+.flash-message {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.flash-message.success {
+    color: green;
+}
+
+.flash-message.danger {
+    color: red;
+}
+
+/* 🔹 PROFILE */
+.profile {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+/* 🔹 INVENTORY SECTION - HORIZONTAL SCROLL */
+.inventory {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 🔹 SCROLLABLE ITEMS CONTAINER */
+.items-container {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    padding-bottom: 10px;
+}
+
+/* 🔹 ITEM CARD */
+.item-card {
+    min-width: 200px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* 🔹 ITEM IMAGE */
+.item-card img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* 🔹 ITEM INPUT */
+.item-card input {
+    width: 50px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+/* 🔹 BUTTONS */
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+/* 🔹 PRIMARY BUTTON */
+.primary {
+    background: black;
+    color: white;
+}
+
+.primary:hover {
+    background: #333;
+}
+
+/* 🔹 SECONDARY BUTTON (Complaint) */
+.secondary {
+    background: #f784b3;
+    color: white;
+}
+
+.secondary:hover {
+    background: #d96092;
+}
+
+/* 🔹 COMPLAINT FORM */
+.complaint {
+    margin: 20px 0;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 TEXTAREA */
+.complaint textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+/* 🔹 RESPONSIVE DESIGN */
+@media (max-width: 900px) {
+    .dashboard-body {
+        padding: 10px;
+    }
+
+    .items-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+    }
+
+    .item-card {
+        min-width: 180px;
+    }
+}

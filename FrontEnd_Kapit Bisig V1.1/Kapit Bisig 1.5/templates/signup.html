@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Kapit-Bisig Pantry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <img src="{{ url_for('static', filename='images/KBLogoBlk.png') }}" alt="Kapit-Bisig Logo" class="logo">
+            <h1>Create an Account</h1>
+            <p>Join our community and help make a difference!</p>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <p class="flash-message {{ category }}">{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <!-- Signup Form -->
+            <form method="POST">
+                <label>Username:</label>
+                <input type="text" name="username" required>
+
+                <label>Password:</label>
+                <input type="password" name="password" required>
+
+                <label>Confirm Password:</label>
+                <input type="password" name="confirm_password" required>
+
+                <label>First Name:</label>
+                <input type="text" name="firstName" required>
+
+                <label>Last Name:</label>
+                <input type="text" name="lastName" required>
+
+                <label>Salary:</label>
+                <input type="number" name="salary" required>
+
+                <label>Role:</label>
+                <select name="role">
+                    <option value="client">Client</option>
+                    <option value="admin">Admin</option>
+                </select>
+
+                <button type="submit" class="btn primary">Sign Up</button>
+            </form>
+
+            <a href="{{ url_for('dashboard.home') }}" class="btn secondary">Back to Home</a>
+        </div>
+
+        <!-- Right-Side Image -->
+        <div class="image-container"></div>
+    </div>
+</body>
+</html>
