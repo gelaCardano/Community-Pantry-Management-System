@@ -1,0 +1,60 @@
+/* Signup Page Layout */
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  /* Left Side (Form Section) */
+  .form-container {
+    flex: 1;
+    max-width: 450px;
+    background: #fff;
+    padding: 50px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    overflow-y: auto;
+  }
+  
+  /* Form Styling */
+  form {
+    width: 100%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #444;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease;
+  }
+  
+  /* Signup Background */
+  .image-container {
+    flex: 1;
+    height: 100vh;
+    max-width: 750px;
+    background: url("../images/community_pantry.png") no-repeat center center;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transform: scale(1.1);
+  }
+  
