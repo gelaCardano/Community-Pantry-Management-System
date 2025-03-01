@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Kapit-Bisig Pantry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user_dashboard.css') }}">
+</head>
+<body class="dashboard-body">
+
+    <!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/KBLogoBlk.png') }}" alt="Kapit Bisig Logo">
+        </div>
+        <nav>
+            <a href="{{ url_for('dashboard.home') }}" class="nav-btn home-btn">Home</a>
+            <a href="{{ url_for('auth.change_password') }}" class="nav-btn change-password-btn">Change Password</a>
+            <a href="{{ url_for('auth.logout') }}" class="nav-btn logout-btn">Logout</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Welcome Message -->
+        <h2 class="welcome-text">Welcome, {{ user['firstName'] }}!</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flash-message {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Profile Section -->
+        <section class="profile">
+            <h3>Your Profile</h3>
+            <p><strong>Username:</strong> {{ user['username'] }}</p>
+            <p><strong>Points:</strong> {{ user['points'] }}</p>
+            <p><a href="{{ url_for('auth.change_password') }}" class="change-password-link">Change Password</a></p>
+        </section>
+
+        <!-- Available Pantry Items (3-Column Grid Layout with Scroll) -->
+        <section class="inventory">
+            <h3>Available Pantry Items</h3>
+            {% if items %}
+                <form method="POST" action="{{ url_for('dashboard.request_items_bulk') }}">
+                    <div class="items-grid">
+                        {% for item in items %}
+                        <div class="item-card">
+                            <img src="{{ url_for('static', filename='images/items/' ~ (item['itemName']|replace(' ', '-')).lower() ~ '.png') }}" 
+                                 alt="{{ item['itemName'] }}">
+                            <div class="item-info">
+                                <h4>{{ item['itemName'] }}</h4>
+                                <p>Value: {{ item['itemValue'] }} points</p>
+                                <p>Available: {{ item['itemQuantity'] }}</p>
+                                <input type="number" name="quantity_{{ item['itemID'] }}" min="0" max="{{ item['itemQuantity'] }}" value="0">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn primary">Add to Cart & Request</button>
+                </form>
+            {% else %}
+                <p class="no-items">No items available in the pantry.</p>
+            {% endif %}
+        </section>
+
+        <!-- Lodge a Complaint Section -->
+        <section class="complaint small-complaint">
+            <h3>Lodge a Complaint</h3>
+            <form method="POST" action="{{ url_for('dashboard.file_complaint') }}">
+                <label for="issueDesc">Describe the Issue:</label>
+                <textarea name="issueDesc" id="issueDesc" rows="2" required></textarea>
+                <button type="submit" class="btn secondary">Submit Complaint</button>
+            </form>
+        </section>
+    </main>
+
+</body>
+</html>
