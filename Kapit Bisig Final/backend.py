@@ -55,7 +55,7 @@ def assign_missing_item_images():
         )
 
     if items:
-        print("✅ Missing item images assigned successfully!")
+        print("Missing item images assigned successfully!")
 
 
 # ---------- User Management ---------- #
