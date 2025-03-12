@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Kapit Bisig</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="home-body">
+
+    <!-- 🔹 Enlarged Header with Logo on the Left & Buttons on the Right -->
+    <div class="header-bar">
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='images/KBLogoWP.png') }}" alt="Kapit Bisig Logo" class="home-logo">
+            <h1 class="title-text">Kapit Bisig</h1>
+        </div>
+        <div class="header-buttons">
+            <a href="{{ url_for('auth.signup') }}" class="white-btn header-btn">Sign Up</a>
+            <a href="{{ url_for('auth.login') }}" class="white-btn header-btn">Log In</a>
+        </div>
+    </div>
+
+    <!-- 🔹 Main Content Section -->
+    <div class="home-container">
+        <h2 class="tagline"><em>Basta’t laging magkakapit-bisig, makakaya ang lahat!</em></h2>
+    </div>
+
+    <!-- 🔹 Footer Contact Information -->
+    <div class="footer-bar">
+        <p>Contact us: <a href="mailto:admin@kapitbisig.com">admin@kapitbisig.com</a> | 
+            <i class="fa-solid fa-phone phone-icon"></i> 0906 210 5166
+        </p>
+    </div>
+
+</body>
+</html>

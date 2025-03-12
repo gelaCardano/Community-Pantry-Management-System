@@ -1,0 +1,172 @@
+/* 🔹 Full-Screen Background for Login */
+.login-body {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  background: url("../images/loginbg.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔹 Login Box with Drop Shadow */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  width: 350px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Added drop shadow */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+/* 🔹 Subtle Hover Effect for Box */
+.login-box:hover {
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* 🔹 Centered Logo with Increased Size */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.login-logo {
+  width: 105px; /* 1.75x increase from original ~60px */
+  height: auto;
+}
+
+/* 🔹 Title Styling */
+.login-title {
+  font-family: 'Pacifico', cursive;
+  color: black; /* Changed from pink to black */
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.login-subtitle {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* 🔹 Form Styling */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+input:focus {
+  border-color: #f784b3;
+  box-shadow: 0px 0px 5px rgba(247, 132, 179, 0.5);
+}
+
+/* 🔹 Button Styling */
+.primary-btn {
+  background: #f784b3;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+  background: #e06c9f;
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Secondary Button */
+.secondary-btn {
+  display: block;
+  text-align: center;
+  background: white;
+  color: #f784b3;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  border: 2px solid #f784b3;
+}
+
+.secondary-btn:hover {
+  background: #f784b3;
+  color: white;
+}
+
+/* 🔹 Login Links */
+.login-links {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.login-links a {
+  color: #f784b3;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.login-links a:hover {
+  text-decoration: underline;
+}
+
+/* 🔹 Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .login-box {
+      width: 90%;
+      padding: 30px;
+  }
+  .login-title {
+      font-size: 22px;
+  }
+  .login-form input {
+      font-size: 14px;
+      padding: 10px;
+  }
+  .primary-btn {
+      font-size: 16px;
+      padding: 10px;
+  }
+  .secondary-btn {
+      font-size: 14px;
+      padding: 8px;
+  }
+}

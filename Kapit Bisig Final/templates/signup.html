@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Kapit-Bisig Pantry</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/signup.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    
+    <script>
+        function toggleAdminFields() {
+            var role = document.getElementById("role").value;
+            var adminCodeField = document.getElementById("admin-code");
+            var salaryField = document.getElementById("salary-field");
+
+            if (role === "admin") {
+                adminCodeField.style.display = "block";
+                salaryField.style.display = "none";
+            } else {
+                adminCodeField.style.display = "none";
+                salaryField.style.display = "block";
+            }
+        }
+    </script>
+</head>
+<body class="signup-body">
+    <div class="form-container">
+        <div class="logo-wrapper">
+            <img src="{{ url_for('static', filename='images/KBLogoBlk.png') }}" alt="Kapit-Bisig Logo" class="signup-logo">
+        </div>
+        <h1 class="title-text">Create an Account</h1>
+        <p class="subtitle-text">Join our community and help make a difference!</p>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="flash-message {{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- Signup Form -->
+        <form method="POST" class="signup-form">
+            <label for="role">Role</label>
+            <select id="role" name="role" onchange="toggleAdminFields()" required>
+                <option value="client">Client</option>
+                <option value="admin">Admin</option>
+            </select>
+            
+            <div id="admin-code" class="hidden-field">
+                <label for="code">Admin Code</label>
+                <input type="text" name="code" placeholder="Enter admin code">
+            </div>
+        
+            <label for="username">Username</label>
+            <input type="text" name="username" required placeholder="Enter username">
+        
+            <label for="password">Password</label>
+            <input type="password" name="password" required placeholder="Enter password">
+        
+            <label for="confirm_password">Confirm Password</label>
+            <input type="password" name="confirm_password" required placeholder="Confirm password">
+        
+            <label for="firstName">First Name</label>
+            <input type="text" name="firstName" required placeholder="Enter first name">
+        
+            <label for="lastName">Last Name</label>
+            <input type="text" name="lastName" required placeholder="Enter last name">
+        
+            <div id="salary-field">
+                <label for="salary">Salary</label>
+                <input type="number" name="salary" min="0" placeholder="Enter salary">
+            </div>
+            
+            <button type="submit" class="btn primary-btn">Sign Up</button>
+        </form>
+        
+        <a href="{{ url_for('dashboard.home') }}" class="btn secondary-btn">Back to Home</a>
+    </div>
+</body>
+</html>

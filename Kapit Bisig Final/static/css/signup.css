@@ -1,0 +1,136 @@
+/* 🔹 Full Page Styling with Background */
+.signup-body {
+  height: 100vh;
+  width: 100vw;
+  background: url("../images/community_pantry.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+/* 🔹 Form Container */
+.form-container {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent for readability */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  width: 400px;
+}
+
+/* 🔹 Centered Logo */
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.signup-logo {
+  width: 60px;
+  height: auto;
+}
+
+/* 🔹 Text Styling */
+.title-text {
+  font-family: 'Pacifico', cursive;
+  color: #f784b3;
+  text-align: center;
+  font-size: 26px;
+}
+
+.subtitle-text {
+  font-size: 16px;
+  text-align: center;
+  color: #555;
+}
+
+/* 🔹 Input Fields */
+.signup-form label {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+  font-weight: bold;
+}
+
+.signup-form input, .signup-form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 2px solid #f784b3;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+/* 🔹 Improved Button Styling */
+.primary-btn {
+  background: #f784b3;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.primary-btn:hover {
+  background: #e06c9f;
+  transform: translateY(-3px);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 🔹 Secondary Button */
+.secondary-btn {
+  display: block;
+  text-align: center;
+  background: white;
+  color: #f784b3;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  border: 2px solid #f784b3;
+}
+
+.secondary-btn:hover {
+  background: #f784b3;
+  color: white;
+}
+
+/* 🔹 Admin Code & Salary Field */
+.hidden-field {
+  display: none;
+}
+
+/* 🔹 Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  .form-container {
+      width: 90%;
+      padding: 20px;
+  }
+  .title-text {
+      font-size: 22px;
+  }
+  .signup-form input {
+      font-size: 14px;
+      padding: 8px;
+  }
+  .primary-btn {
+      font-size: 16px;
+      padding: 10px;
+  }
+  .secondary-btn {
+      font-size: 14px;
+      padding: 8px;
+  }
+}
