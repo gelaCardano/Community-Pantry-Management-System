@@ -42,7 +42,7 @@ def admin_dashboard():
     pending_requests = execute_query("SELECT * FROM transactions WHERE status = 'Pending Approval'")
     complaints = execute_query("SELECT * FROM complaints WHERE issueStatus = 'Pending'")
 
-    # ✅ Fetch Pending Donations for Admin Review
+    # Fetch Pending Donations for Admin Review
     pending_donations = execute_query("SELECT * FROM donation_requests WHERE status = 'Pending Approval'")
 
     print(f"DEBUG: Found {len(pending_donations)} pending donations.")
@@ -114,7 +114,6 @@ def approve_donation():
 
     donationID = request.form["donationID"]
 
-    # ✅ Corrected: Fetch the admin user details properly
     admin_data = execute_query(
         "SELECT * FROM users WHERE userID = ?", (session["userID"],), fetchone=True
     )
@@ -122,8 +121,7 @@ def approve_donation():
     if not admin_data:
         flash("Admin user not found!", "danger")
         return redirect(url_for("dashboard.admin_dashboard"))
-
-    # ✅ Create an actual `Admin` object
+        
     admin = Admin(
         admin_data["userID"],
         admin_data["username"],
