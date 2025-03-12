@@ -27,7 +27,7 @@ def init_db():
         columns = [col[1] for col in cursor.fetchall()]
         if "itemImage" not in columns:
             cursor.execute("ALTER TABLE items ADD COLUMN itemImage TEXT")
-            print("✅ Added missing column: itemImage")
+            print("Added missing column: itemImage")
 
         # Complaints Table
         cursor.execute('''CREATE TABLE IF NOT EXISTS complaints (
@@ -52,7 +52,7 @@ def init_db():
         donation_columns = [col[1] for col in cursor.fetchall()]
 
         if not donation_columns:  # Table does not exist, create it
-            print("⚠️ `donation_requests` table is missing. Creating it now...")
+            print("`donation_requests` table is missing. Creating it now...")
             cursor.execute('''CREATE TABLE donation_requests (
                 id INTEGER PRIMARY KEY AUTOINCREMENT, 
                 userID INTEGER, 
@@ -62,7 +62,7 @@ def init_db():
                 itemImage TEXT,  
                 status TEXT DEFAULT 'Pending Approval', 
                 FOREIGN KEY (userID) REFERENCES users(userID))''')
-            print("✅ Created `donation_requests` table.")
+            print("Created `donation_requests` table.")
 
         conn.commit()
         print("✅ Database initialized successfully!")
