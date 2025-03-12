@@ -15,18 +15,17 @@ def signup():
         firstName = request.form.get("firstName")
         lastName = request.form.get("lastName")
 
-        # ✅ Fix: Ensure salary is a valid integer
         salary_input = request.form.get("salary", "0")  # Default to "0" if empty
         salary = int(salary_input) if salary_input.isdigit() else 0  # Convert only if valid
 
-        # ✅ Validate admin code for admin signups
+        # Validate admin code for admin signups
         if role == "admin":
             code = request.form.get("code")
             if code != "123456789":
                 flash("Admin code is incorrect, please try again", "danger")
                 return redirect(url_for("auth.signup"))
 
-        # ✅ Validate password confirmation
+        # Validate password confirmation
         if password != confirm_password:
             flash("Passwords do not match!", "danger")
             return redirect(url_for("auth.signup"))
