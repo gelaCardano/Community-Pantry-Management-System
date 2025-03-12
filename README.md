@@ -8,9 +8,9 @@ CONTRIBUTORS:
 - COLUMNA, Franz Railey
 - LIM, Julian 
 
-HOW TO USE THE PROGRAM: (As of Feb. 26, 2025)
+HOW TO USE THE PROGRAM: 
 1. Optional: Download the SQLite Viewer extension in VSC.
-2. Download the files in FrontEnd_Kapit Bisig V1.1. 
+2. Download the files in Kapit bisig Final.  
 3. Run the following commands in the terminal:
    "pip install bcrypt",
    "pip install passlib",
